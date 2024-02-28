@@ -46,8 +46,14 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function register(){
-        dd('ini register');
+    public function register(Request $request){
+        $credentials = $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'address' => 'required',
+        ]);
+
+        return view('register');
     }
 
     public function logout(Request $request){
