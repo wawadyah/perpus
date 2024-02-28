@@ -13,20 +13,31 @@
             height: 100vh;
             /* background-color: aqua; */
         }
+
+        form{
+            width: 400px;
+        }
     </style>
 </head>
 <body>
     
-    <div class="main d-flex justify-content-center align-items-center">
-        <form action="" method="post" class="border p-3">
+    <div class="main d-flex flex-column justify-content-center align-items-center">
+        @if (session('status'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        <form action="/login" method="post" class="border p-3">
             @csrf
             <div>
                 <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" name="username" class="form-control">
+                <input type="text" id="username" name="username" class="form-control" required>
             </div>
             <div>
                 <label for="password" class="form-label">Password</label>
-                <input type="text" name="password" id="password" class="form-control mb-3">
+                <input type="text" name="password" id="password" class="form-control mb-3" required>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary form-control">Login</button>
