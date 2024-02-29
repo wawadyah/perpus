@@ -24,7 +24,7 @@
     <div class="main d-flex justify-content-center align-items-center flex-column">
 
         @if (session('status'))
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" style="width: 500px;">
                 {{ session('message') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

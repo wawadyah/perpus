@@ -15,13 +15,16 @@ Route::get('/log', function () {
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::middleware('only_guest')->group(function () {
+    Route::get('register', [AuthController::class, 'register']);
+    Route::post('register', [AuthController::class, 'registerProcess']);
 
-    Route::post('login', [AuthController::class, 'authenticating']);
-    Route::get('logout', [AuthController::class, 'logout']);
 });
 Route::get('register', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'registerProcess']);
+Route::post('login', [AuthController::class, 'authenticating']);
+Route::get('logout', [AuthController::class, 'logout']);
 
 Route::get('dashboard',  [DashboardController::class,'index'])->middleware(['auth','only_admin']);
-Route::get('profile',  [UserController::class,'index'])->middleware(['auth', 'only_client']);
+Route::get('profile',  [UserController::class,'index'])->middleware(['auth']);
 
 Route::get('books', [BookController::class, 'index']);

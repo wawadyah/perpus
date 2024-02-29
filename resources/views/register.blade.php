@@ -23,14 +23,23 @@
     
     <div class="main d-flex justify-content-center align-items-center flex-column">
 
+        @if ($errors->any())
+        <div class="alert alert-danger" style="width: 500px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         @if (session('status'))
-            <div class="alert alert-danger">
-                {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-success">
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="width: 500px"></button>
+        </div>
         @endif
        <div class="login-box">
-        <form action="" method="post" class="border p-3">
+        <form action="register" method="post" class="border p-3">
             @csrf
             <div>
                 <label for="username" class="form-label">Username</label>

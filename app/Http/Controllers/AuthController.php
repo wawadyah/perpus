@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,35 +26,48 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)){
 
             if(Auth::user()->status != 'active'){
-                Session::flash('status', 'failed');
-                Session::flash('message', 'Youracoount isnot active yet, please contact admin');
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
 
+                Session::flash('status', 'failed');
+                Session::flash('message', 'Your acoount is not active yet, please contact admin');
                 
                 return redirect('/login');
             } 
 
-            // $request->session()->regenerate();
             if(Auth::user()->role_id == 1){
+                $request->session()->regenerate();
                 return redirect('dashboard');
-            }
-
-            if(Auth::user()->role_id == 2){
+            } else{
+                $request->session()->regenerate();
                 return redirect('profile');
             }
         }
-        Session::flash('status', 'failed');
-        Session::flash('message', 'Yotu login is invalid');
-        return redirect('/login');
     }
 
-    public function register(Request $request){
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
+    public function register(){
+
+        return view('register');
+
+        // dd('hay');
+    }
+
+    public function registerProcess(Request $request){
+        $validated = $request->validate([
+            'username' => 'required|unique:users|max:255',
+            'password' => 'required|min:5|max:255',
+            'phone' => 'max:255',
             'address' => 'required',
         ]);
 
-        return view('register');
+        $validated['password'] = Hash::make($validated['password']);
+        $user = User::create($request->all());
+
+        Session::flash('status', 'success');
+        Session::flash('message', 'Your register is success, please contact admin for active');
+        return redirect('/register');
+        // return redirect('/login')->with('success', 'Registration successfull! Please login');
     }
 
     public function logout(Request $request){
