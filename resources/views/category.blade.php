@@ -8,7 +8,7 @@
             <button type="button" class=" my-6 mb-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View Deleted Category</button>
         </a>
-        <a href="book-add">
+        <a href="add-category">
             <button type="button" class=" my-6 mb-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
             dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Category</button>
         </a>
@@ -48,19 +48,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($book as $item)
+            @foreach ($categories as $item)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$loop->iteration}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$item->book_code}}
-                </td>
-                <td class="px-6 py-4">
-                    {{$item->title}}
-                </td>
-                <td class="px-6 py-4">
-                    {{$item->status}}
+                    {{$item->name}}
                 </td>
                 <td class="px-6 py-4">
                     <a href="edit-category/{{$item->slug}}">edit</a> |

@@ -39,7 +39,7 @@
         </div>
         @endif
        <div class="login-box">
-        <form action="register" method="post" class="border p-3">
+        <form action="register" method="post" class="border p-3 style="width: 500px">
             @csrf
             <div>
                 <label for="username" class="form-label">Username</label>

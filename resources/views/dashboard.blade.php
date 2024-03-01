@@ -84,12 +84,11 @@
                     $2999
                 </td>
             </tr>
+            {{-- @foreach ($category_count as $item) --}}
             <tr class="border-b border-gray-200 dark:border-gray-700">
-                @foreach ($category_count as $item)
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                        {{ $loop->iteration }}    
+                        haha
                 </th>
-                @endforeach
                 <td class="px-6 py-4">
                     White
                 </td>
@@ -100,6 +99,7 @@
                     $1999
                 </td>
             </tr>
+            {{-- @endforeach --}}
         
         </tbody>
     </table>
