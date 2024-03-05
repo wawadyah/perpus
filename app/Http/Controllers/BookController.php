@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class BookController extends Controller
 {
@@ -14,7 +15,14 @@ class BookController extends Controller
     }
 
     public function add(){
-        return view ('book-add');
+        $categories = Category::all();
+        return view ('book-add', ['categories' => $categories]);
+    }
+
+    public function edit($slug){
+        $categories = Category::all();
+        $book = Category::where('slug', $slug)->first();
+        return view('book-edit', ['categories' => $categories, 'book' => $book]);
     }
 
     public function submit(Request $request){
@@ -26,15 +34,15 @@ class BookController extends Controller
         if($request->file('image')){
             $extension = $request->file('image')->getClientOriginalExtension();
             $newName = $request->title.'-'.now()->timestamp.'.'.$extension;
-            $request->file('image')->storeAs('cover', $newName);
+            $request->file('image')->storeAs('image', $newName);
         }
 
-        $book = Book::create($request->all());
-        $request['cover'] = $newName;
-        // return redirect('categories')->with('status', 'Category success updated!');
-        return ($request['cover']);
+        $requestData = $request->all();
+        $requestData['cover'] = $newName;
 
-        $book = Book::create($request->all());
+        $book = Book::create($requestData);
+        $book->categories()->sync($request->categories);
         return redirect('books')->with('status', 'Book success updated!');
+
     }
 }

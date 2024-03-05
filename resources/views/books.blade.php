@@ -40,7 +40,16 @@
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Book Category
+                    Code Buku
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Judul Buku
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Category Buku
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -60,12 +69,27 @@
                     {{$item->title}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$item->status}}
+                    @foreach ($item->categories as $data)
+                    {{$data->name}},
+                    @endforeach
                 </td>
                 <td class="px-6 py-4">
-                    <a href="edit-category/{{$item->slug}}">edit</a> |
+                    {{$item->status}}
+                </td>
+                @if ($item->cover === NULL)
+                <td class="px-6 py-4">
+                    <img src="{{ asset('storage/image/'.$item->cover)}}" alt="photo" width="100px">
+                </td>
+                @else
+                <td class="px-6 py-4">
+                    <img src="{{ asset('storage/image/'.$item->cover)}}" alt="photo" width="100px">
+                </td>
+                @endif
+                <td class="px-6 py-4">
+                    <a href="book-edit/{{$item->slug}}">edit</a> |
                     <a href="category-delete/{{$item->slug}}">delete</a>
                 </td>
+                
             </tr>
             @endforeach
         

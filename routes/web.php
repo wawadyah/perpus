@@ -31,6 +31,7 @@ Route::get('profile',  [UserController::class,'index'])->middleware(['auth']);
 Route::get('books', [BookController::class, 'index']);
 Route::get('book-add', [BookController::class, 'add']);
 Route::post('book-add', [BookController::class, 'submit']);
+Route::get('book-edit/{slug}', [BookController::class, 'edit']);
 
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('add-category', [CategoryController::class, 'add']);
