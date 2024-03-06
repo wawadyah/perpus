@@ -66,7 +66,5 @@ class CategoryController extends Controller
         $category = Category::onlyTrashed()->where('slug', $slug)->first();
         $category->restore();
         return redirect('categories')->with('status', 'Category Restored Successfully!');
-
-        dd('hay');
     }
 }
