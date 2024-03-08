@@ -7,9 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-
-
-
+use App\Http\Controllers\RentBookController;
 
 Route::get('/', [PublicController::class, 'index'])->middleware(['only_guest']);;
 
@@ -59,4 +57,5 @@ Route::get('user-destroy/{slug}', [UserController::class, 'destroy']);
 Route::get('user/user-deleted', [UserController::class, 'showDeleted']);
 Route::get('user-restore/{slug}', [UserController::class, 'restore']);
 
+Route::get('book-rent', [RentBookController::class, 'index']);
 });
