@@ -5,9 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RentLogController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RentBookController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReturnBookController;
 
 Route::get('/', [PublicController::class, 'index'])->middleware(['only_guest']);;
 
@@ -50,12 +52,19 @@ Route::get('category-restore/{slug}', [CategoryController::class, 'restore']);
 
 Route::get('user', [UserController::class, 'index']);
 Route::get('user/new-user', [UserController::class, 'newUser']);
-Route::get('user-detail/{slug}', [UserController::class, 'userDetail']);
+Route::get('user-detail/{slug}', [UserController::class, 'show']);
 Route::get('user-approve/{slug}', [UserController::class, 'approve']);
 Route::get('user-delete/{slug}', [UserController::class, 'delete']);
 Route::get('user-destroy/{slug}', [UserController::class, 'destroy']);
 Route::get('user/user-deleted', [UserController::class, 'showDeleted']);
 Route::get('user-restore/{slug}', [UserController::class, 'restore']);
 
-Route::get('book-rent', [RentBookController::class, 'index']);
+Route::get('rent-book', [RentBookController::class, 'index']);
+Route::post('rent-book', [RentBookController::class, 'submit']);
+
+Route::get('rent-log', [RentLogController::class, 'index']);
+Route::get('return-book', [ReturnBookController::class, 'index']);
+Route::post('return-book', [ReturnBookController::class, 'save']);
 });
+
+Route::get('profile', [UserController::class, 'profile'])->middleware('only_client');

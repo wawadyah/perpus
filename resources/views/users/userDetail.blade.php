@@ -47,4 +47,8 @@
     </div>
 </div>
 
+<div class="mt-5">
+    <x-rent-log-table :rentlog='$rentlog'/>
+</div>
+
 @endsection
