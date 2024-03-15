@@ -78,7 +78,7 @@
                 </td>
                 @if ($item->cover === NULL)
                 <td class="px-6 py-4">
-                    <img src="{{ asset('storage/image/'.$item->cover)}}" alt="photo" width="100px">
+                    <img src="{{ asset('storage/image/pelangi-nusantara-1709771673.png')}}" alt="photo" width="100px">
                 </td>
                 @else
                 <td class="px-6 py-4">

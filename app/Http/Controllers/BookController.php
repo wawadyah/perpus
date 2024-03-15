@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Spatie\Browsershot\Browsershot;
 
 class BookController extends Controller
 {
@@ -88,6 +89,5 @@ class BookController extends Controller
         $book = Book::onlyTrashed()->get();
         return view ('book-deleted', ['book' => $book]);
     }
-
 
 }

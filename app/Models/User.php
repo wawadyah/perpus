@@ -49,6 +49,7 @@ class User extends Authenticatable
 
     protected $attributes = [
         'role_id' => 2,
+        'status' => 'inactive',
     ];
 
     public function sluggable(): array

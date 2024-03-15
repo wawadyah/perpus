@@ -32,7 +32,7 @@ class UserController extends Controller
         $user['status'] = 'active';
         $user->save();
 
-        return redirect('users.user')->with('status', 'Status approved succesfully!');
+        return redirect('user')->with('status', 'Status approved succesfully!');
     }
     
     public function delete($slug){
